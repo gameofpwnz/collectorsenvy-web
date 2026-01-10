@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Our Group Events</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-card: #020617;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.18);
+      --accent-border: rgba(59, 130, 246, 0.5);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.9);
+      --radius-xl: 1.75rem;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #1a2440, #020617 55%),
+        radial-gradient(circle at bottom, #020617, #020617);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1100px;
+      background:
+        linear-gradient(135deg, rgba(148, 163, 184, 0.08), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      padding: 2rem 1.8rem 2.4rem;
+      backdrop-filter: blur(24px);
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding: 2.2rem 2.6rem 2.8rem;
+      }
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent-border);
+      width: fit-content;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2.4vw + 1rem, 2.3rem);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.6rem;
+    }
+
+    .year-badge {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+    }
+
+    .subtitle {
+      margin: 0.1rem 0 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Controls */
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.3rem;
+      align-items: center;
+    }
+
+    .controls-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .field {
+      flex: 1;
+      min-width: 170px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    input[type="search"],
+    select {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, #020617, #020617);
+      padding: 0.6rem 0.9rem;
+      padding-left: 2.25rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    input[type="search"]::placeholder {
+      color: #6b7280;
+    }
+
+    input[type="search"]:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4);
+      background: linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.12),
+        rgba(15, 23, 42, 0.95)
+      );
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(8%);
+      font-size: 0.9rem;
+      color: #6b7280;
+      pointer-events: none;
+    }
+
+    .pill-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      padding: 0.55rem 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      white-space: nowrap;
+      transition: transform 0.1s ease, box-shadow 0.1s ease,
+        background 0.1s ease, border-color 0.1s ease;
+    }
+
+    .pill-btn span.icon {
+      font-size: 0.95rem;
+    }
+
+    .pill-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: var(--accent-border);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.85);
+      transform: translateY(-1px);
+    }
+
+    .pill-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    /* Events container */
+
+    .events-wrapper {
+      border-radius: 1.6rem;
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.99)
+      );
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      max-height: 70vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .events-header {
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .events-header strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .events-list {
+      padding: 0.5rem 0.9rem 0.9rem;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .events-list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .events-list::-webkit-scrollbar-thumb {
+      background: rgba(75, 85, 99, 0.9);
+      border-radius: 999px;
+    }
+
+    /* Year + month groups */
+
+    .year-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .year-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0.4rem 0 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .year-heading-badge {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    .year-divider {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.4),
+        rgba(148, 163, 184, 0.02)
+      );
+      margin-left: 0.5rem;
+    }
+
+    .year-heading-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .month-title {
+      font-size: 0.87rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+      margin: 0.9rem 0 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .month-title::before {
+      content: "";
+      display: inline-block;
+      width: 18px;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(148, 163, 184, 0.25),
+        rgba(148, 163, 184, 0.05)
+      );
+    }
+
+    /* Event card */
+
+    .event-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      padding: 0.7rem 0.85rem;
+      margin-bottom: 0.45rem;
+      border-radius: 1.1rem;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      position: relative;
+      transition: border-color 0.12s ease, transform 0.08s ease,
+        box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .event-card:hover {
+      border-color: rgba(59, 130, 246, 0.7);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+      background: radial-gradient(
+          circle at top left,
+          rgba(37, 99, 235, 0.22),
+          transparent 55%
+        ),
+        radial-gradient(circle at bottom right, #020617, #020617);
+    }
+
+    .date-pill {
+      min-width: 72px;
+      border-radius: 0.9rem;
+      padding: 0.35rem 0.55rem;
+      text-align: center;
+      background: radial-gradient(circle at top, #111827, #020617);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.12rem;
+    }
+
+    .date-pill .day {
+      font-size: 0.98rem;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .date-pill .month {
+      font-size: 0.7rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .date-pill .dow {
+      font-size: 0.7rem;
+      color: #6b7280;
+    }
+
+    .event-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.18rem;
+      min-width: 0;
+    }
+
+    .event-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.45rem;
+    }
+
+    .event-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .event-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      white-space: nowrap;
+    }
+
+    .event-time::before {
+      content: "⏰";
+      font-size: 0.85rem;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.05rem;
+    }
+
+    .meta-tag {
+      font-size: 0.75rem;
+      padding: 0.12rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .meta-tag.location::before {
+      content: "📍";
+    }
+
+    .meta-tag.category::before {
+      content: "🏷️";
+    }
+
+    .event-description {
+      margin-top: 0.12rem;
+      font-size: 0.84rem;
+      color: #d1d5db;
+      line-height: 1.4;
+    }
+
+    .actions-row {
+      margin-top: 0.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      text-decoration: none;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.95);
+      transition: background 0.12s ease, border-color 0.12s ease,
+        transform 0.08s ease, box-shadow 0.12s ease;
+    }
+
+    .btn-link.info::before {
+      content: "ℹ️";
+      font-size: 0.9rem;
+    }
+
+    .btn-link.tickets {
+      border-color: rgba(74, 222, 128, 0.8);
+      background: rgba(22, 101, 52, 0.4);
+    }
+
+    .btn-link.tickets::before {
+      content: "🎟️";
+      font-size: 0.9rem;
+    }
+
+    .btn-link:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: var(--accent-border);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.8);
+      transform: translateY(-0.5px);
+    }
+
+    .btn-link.tickets:hover {
+      border-color: rgba(34, 197, 94, 1);
+      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.6);
+    }
+
+    .summary {
+      padding: 0.75rem 1.2rem 0.9rem;
+      border-top: 1px solid rgba(31, 41, 55, 0.95);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.3rem 0.8rem;
+      }
+      .shell {
+        border-radius: 1.4rem;
+        padding: 1.6rem 1.3rem 1.8rem;
+      }
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+      .date-pill {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.45rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="chip">Our Group • Events</div>
+      <h1>
+        Collectors Envy Event Calendar
+        <span class="year-badge" id="yearLabel"></span>
+      </h1>
+      <p class="subtitle">
+        Browse all our events, neatly organized by year and month.
+      </p>
+    </header>
+
+    <section class="controls">
+      <div class="controls-group">
+        <div class="field" style="flex-basis:100%;">
+          <label for="searchInput">Search</label>
+          <span class="field-icon">🔎</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search by title, location, or description…"
+          />
+        </div>
+
+        <div class="field">
+          <label for="yearFilter">Year</label>
+          <span class="field-icon">📅</span>
+          <select id="yearFilter">
+            <option value="all">All years</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="monthFilter">Month</label>
+          <span class="field-icon">🗓️</span>
+          <select id="monthFilter">
+            <option value="all">All months</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="pill-btn" id="jumpNextBtn" type="button">
+        <span class="icon">📍</span>
+        Jump to next event
+      </button>
+    </section>
+
+    <section class="events-wrapper">
+      <div class="events-header">
+        <div>
+          <strong id="countLabel">0 events</strong>
+          <span id="filterLabel"></span>
+        </div>
+        <div id="rangeLabel"></div>
+      </div>
+
+      <div class="events-list" id="eventsList"></div>
+
+      <div class="summary">
+
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // =====================================================
+    // 1. DEFINE YOUR EVENTS HERE
+    //    date = start date (required)
+    //    endDate = end of range (optional, for multi-day events)
+    // =====================================================
+    const events = [
+     {
+        date: "2026-01-29",
+        endDate: "2026-02-01",
+        title: "2026 Call of Duty League OpTic Texas Major I, presented by Monster Energy",
+        time: "All day",
+        location: "Moody Coliseum - Dallas, TX",
+        category: "Tournament",
+        description: "The 2026 CDL Major I, presented by Monster Energy, takes over Moody Coliseum, launching the new season in the heart of Dallas, Texas. OpTic Texas hosts a weekend packed with elite Call of Duty competition, high-energy crowds, and nonstop action in the first Major of the season. Experience every moment live as the journey to the 2026 World Championship begins in Dallas from January 29 - February 1, 2026.",
+        linkUrl: "https://discord.gg/RgnNBhkzUc",
+        linkText: "Discord Channel",
+        ticketsUrl: "https://www.tixr.com/groups/optictexas/events/optic-texas-major-i-presented-by-monster-energy-166248",
+        ticketsText: "Tickets"
+      },
+     {
+        date: "2026-03-06",
+        title: "OpTic Gaming x Dallas Stars Night",
+        time: "7:00PM",
+        location: "American Airlines Center - Dallas, TX",
+        category: "Promotional",
+        description: "OpTic Gaming night as the Dallas Stars take on the Colorado Avalanche.",
+        linkUrl: "https://discord.gg/tgMptqqyzp",
+        linkText: "Discord Channel",
+        ticketsUrl: "https://www.gofevo.com/event/Videogame26",
+        ticketsText: "Tickets"
+      },
+      {
+        date: "2026-03-27",
+        endDate: "2026-03-29",
+        title: "Dreamhack Birmingham",
+        time: "All day",
+        location: "National Exhibition Centre - Birmingham, UK",
+        category: "Tournament",
+        description: "ESL ONE, CDL MAJOR II, EXPO",
+        linkUrl: "https://discord.gg/ahGTZdEKKW",
+        linkText: "Discord Channel",
+        ticketsUrl: "https://dreamhack.com/birmingham/tickets/?utm_source=birmingham&utm_medium=front_button&utm_campaign=ab_test&utm_content=dreamhack",
+        ticketsText: "Tickets"
+      },
+      {
+        date: "2026-05-15",
+        endDate: "2026-05-17",
+        title: "Dreamhack Atlanta",
+        time: "All day",
+        location: "Georgia World Congress Center - Atlanta, GA",
+        category: "Tournament",
+        description: "IEM, CDL MAJOR III, HALO, EXPO",
+        linkUrl: "https://discord.gg/MGYGS5Baex",
+        linkText: "Discord Channel",
+        ticketsUrl: "https://dreamhack.com/atlanta/tickets/",
+        ticketsText: "Tickets"
+      },
+      {
+        date: "2026-06-25",
+        endDate: "2026-06-28",
+        title: "2026 Call of Duty League Major IV",
+        time: "All day",
+        location: "Paris, France",
+        category: "Tournament",
+        description: "CDL Major IV Tourney",
+        linkUrl: "https://discord.gg/F3x2fuR2fW",
+        linkText: "Discord Channel",
+        ticketsUrl: "#",
+        ticketsText: "Tickets"
+      },
+      {
+        date: "2026-07-16",
+        endDate: "2026-07-19",
+        title: "2026 Call of Duty League Championship (Hosted by Vegas FaZe)",
+        time: "All day",
+        location: "Las Vegas, NV",
+        category: "Tournament",
+        description: "CDL Champs",
+        linkUrl: "https://discord.gg/2bgN5RVVN6",
+        linkText: "Discord Channel",
+        ticketsUrl: "#",
+        ticketsText: "Tickets"
+      }
+    ];
+
+    // =====================================================
+    // 2. HELPERS
+    // =====================================================
+    function parseDate(dateStr) {
+      return new Date(dateStr + "T12:00:00");
+    }
+
+    function formatDateParts(dateStr) {
+      const d = parseDate(dateStr);
+      return {
+        raw: d,
+        year: d.getFullYear(),
+        monthIndex: d.getMonth(),
+        day: String(d.getDate()).padStart(2, "0"),
+        monthShort: d.toLocaleString(undefined, { month: "short" }),
+        monthLabel: d.toLocaleString(undefined, { month: "long" }),
+        dow: d.toLocaleString(undefined, { weekday: "short" })
+      };
+    }
+
+    function groupByYearAndMonth(eventsArr) {
+      const groups = {};
+      eventsArr.forEach(evt => {
+        const parts = formatDateParts(evt.date);
+        const y = parts.year;
+        const m = parts.monthIndex;
+
+        if (!groups[y]) groups[y] = {};
+        if (!groups[y][m]) {
+          groups[y][m] = {
+            label: parts.monthLabel,
+            events: []
+          };
+        }
+        groups[y][m].events.push(evt);
+      });
+      return groups;
+    }
+
+    function getNextUpcomingIndex(sortedEvents) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      for (let i = 0; i < sortedEvents.length; i++) {
+        const d = new Date(sortedEvents[i].date + "T00:00:00");
+        if (d >= today) return i;
+      }
+      return sortedEvents.length - 1;
+    }
+
+    function formatRange(sortedEvents) {
+      if (!sortedEvents.length) return "";
+      const first = parseDate(sortedEvents[0].date);
+      const last = parseDate(sortedEvents[sortedEvents.length - 1].date);
+      const opts = { month: "short", day: "numeric" };
+      if (first.getFullYear() !== last.getFullYear()) {
+        return (
+          first.toLocaleDateString(undefined, { ...opts, year: "numeric" }) +
+          " – " +
+          last.toLocaleDateString(undefined, { ...opts, year: "numeric" })
+        );
+      }
+      return (
+        first.toLocaleDateString(undefined, opts) +
+        " – " +
+        last.toLocaleDateString(undefined, { ...opts, year: "numeric" })
+      );
+    }
+
+    // =====================================================
+    // 3. DOM ELEMENTS
+    // =====================================================
+    const eventsListEl = document.getElementById("eventsList");
+    const yearFilterEl = document.getElementById("yearFilter");
+    const monthFilterEl = document.getElementById("monthFilter");
+    const searchInputEl = document.getElementById("searchInput");
+    const jumpNextBtnEl = document.getElementById("jumpNextBtn");
+    const countLabelEl = document.getElementById("countLabel");
+    const filterLabelEl = document.getElementById("filterLabel");
+    const rangeLabelEl = document.getElementById("rangeLabel");
+    const yearLabelEl = document.getElementById("yearLabel");
+
+    let currentFiltered = [];
+    let sortedAll = [];
+
+    // =====================================================
+    // 4. FILTER DROPDOWNS
+    // =====================================================
+    function populateYearFilter(allEventsSorted) {
+      const years = Array.from(
+        new Set(allEventsSorted.map(e => formatDateParts(e.date).year))
+      ).sort((a, b) => a - b);
+
+      yearFilterEl.innerHTML = '<option value="all">All years</option>';
+      years.forEach(y => {
+        const opt = document.createElement("option");
+        opt.value = String(y);
+        opt.textContent = y;
+        yearFilterEl.appendChild(opt);
+      });
+    }
+
+    function populateMonthFilter(sourceEvents) {
+      const seen = new Set();
+      monthFilterEl.innerHTML = '<option value="all">All months</option>';
+
+      sourceEvents.forEach(evt => {
+        const p = formatDateParts(evt.date);
+        if (!seen.has(p.monthIndex)) {
+          seen.add(p.monthIndex);
+          const opt = document.createElement("option");
+          opt.value = String(p.monthIndex);
+          opt.textContent = p.monthLabel;
+          monthFilterEl.appendChild(opt);
+        }
+      });
+    }
+
+    // =====================================================
+    // 5. RENDERING
+    // =====================================================
+    function renderEvents() {
+      const searchTerm = searchInputEl.value.trim().toLowerCase();
+      const yearValue = yearFilterEl.value;
+      const monthValue = monthFilterEl.value;
+
+      let filtered = [...events].sort(
+        (a, b) => parseDate(a.date) - parseDate(b.date)
+      );
+
+      if (yearValue !== "all") {
+        const yearInt = parseInt(yearValue, 10);
+        filtered = filtered.filter(
+          evt => formatDateParts(evt.date).year === yearInt
+        );
+      }
+
+      if (monthValue !== "all") {
+        const monthIndexFilter = parseInt(monthValue, 10);
+        filtered = filtered.filter(
+          evt => formatDateParts(evt.date).monthIndex === monthIndexFilter
+        );
+      }
+
+      if (searchTerm) {
+        filtered = filtered.filter(evt => {
+          const text =
+            (evt.title || "") +
+            " " +
+            (evt.location || "") +
+            " " +
+            (evt.description || "") +
+            " " +
+            (evt.category || "");
+          return text.toLowerCase().includes(searchTerm);
+        });
+      }
+
+      currentFiltered = filtered;
+      eventsListEl.innerHTML = "";
+
+      if (!filtered.length) {
+        const div = document.createElement("div");
+        div.style.padding = "0.9rem 0.2rem 1.1rem";
+        div.style.fontSize = "0.88rem";
+        div.style.color = "#9ca3af";
+        div.textContent = "No matching events. Try clearing filters or adjusting your search.";
+        eventsListEl.appendChild(div);
+
+        countLabelEl.textContent = "0 events";
+        filterLabelEl.textContent = "";
+        rangeLabelEl.textContent = "";
+        return;
+      }
+
+      const groups = groupByYearAndMonth(filtered);
+      const yearsSorted = Object.keys(groups)
+        .map(Number)
+        .sort((a, b) => a - b);
+
+      yearsSorted.forEach(year => {
+        const yearGroupDiv = document.createElement("div");
+        yearGroupDiv.className = "year-group";
+
+        const yearHeadingRow = document.createElement("div");
+        yearHeadingRow.className = "year-heading-row";
+
+        const yearHeading = document.createElement("div");
+        yearHeading.className = "year-heading";
+        yearHeading.textContent = year;
+
+        const yearBadge = document.createElement("span");
+        yearBadge.className = "year-heading-badge";
+        yearBadge.textContent = "Year";
+
+        yearHeading.appendChild(yearBadge);
+
+        const yearDivider = document.createElement("div");
+        yearDivider.className = "year-divider";
+
+        yearHeadingRow.appendChild(yearHeading);
+        yearHeadingRow.appendChild(yearDivider);
+
+        yearGroupDiv.appendChild(yearHeadingRow);
+
+        const monthsObj = groups[year];
+        const monthIndexes = Object.keys(monthsObj)
+          .map(Number)
+          .sort((a, b) => a - b);
+
+        monthIndexes.forEach(mIndex => {
+          const monthInfo = monthsObj[mIndex];
+
+          const monthTitle = document.createElement("h3");
+          monthTitle.className = "month-title";
+          monthTitle.textContent = monthInfo.label;
+          yearGroupDiv.appendChild(monthTitle);
+
+          monthInfo.events
+            .sort((a, b) => parseDate(a.date) - parseDate(b.date))
+            .forEach(evt => {
+              const start = formatDateParts(evt.date);
+              let end = null;
+              if (evt.endDate) {
+                end = formatDateParts(evt.endDate);
+              }
+
+              const card = document.createElement("article");
+              card.className = "event-card";
+              card.dataset.startDate = evt.date; // for jump-to-next
+
+              const datePill = document.createElement("div");
+              datePill.className = "date-pill";
+
+              if (!end || start.raw.getTime() === end.raw.getTime()) {
+                // Single-day event
+                datePill.innerHTML = `
+                  <div class="day">${start.day}</div>
+                  <div class="month">${start.monthShort}</div>
+                  <div class="dow">${start.dow}</div>
+                `;
+              } else {
+                // Multi-day range
+                const sameMonthAndYear =
+                  start.monthShort === end.monthShort && start.year === end.year;
+
+                const dayRange = sameMonthAndYear
+                  ? `${start.day}–${end.day}` // Jul 01–03
+                  : `${start.monthShort} ${start.day}–${end.monthShort} ${end.day}`; // Jul 30–Aug 02
+
+                const dowRange = `${start.dow}–${end.dow}`;
+
+                datePill.innerHTML = `
+                  <div class="day">${dayRange}</div>
+                  <div class="month">${start.year}</div>
+                  <div class="dow">${dowRange}</div>
+                `;
+              }
+
+              card.appendChild(datePill);
+
+              const body = document.createElement("div");
+              body.className = "event-body";
+
+              const titleRow = document.createElement("div");
+              titleRow.className = "event-title-row";
+
+              const titleEl = document.createElement("div");
+              titleEl.className = "event-title";
+              titleEl.textContent = evt.title || "(Untitled event)";
+              titleRow.appendChild(titleEl);
+
+              if (evt.time) {
+                const timeEl = document.createElement("div");
+                timeEl.className = "event-time";
+                timeEl.textContent = evt.time;
+                titleRow.appendChild(timeEl);
+              }
+
+              body.appendChild(titleRow);
+
+              const metaRow = document.createElement("div");
+              metaRow.className = "meta-row";
+
+              if (evt.location) {
+                const loc = document.createElement("span");
+                loc.className = "meta-tag location";
+                loc.textContent = evt.location;
+                metaRow.appendChild(loc);
+              }
+
+              if (evt.category) {
+                const cat = document.createElement("span");
+                cat.className = "meta-tag category";
+                cat.textContent = evt.category;
+                metaRow.appendChild(cat);
+              }
+
+              if (metaRow.childNodes.length) {
+                body.appendChild(metaRow);
+              }
+
+              if (evt.description) {
+                const desc = document.createElement("div");
+                desc.className = "event-description";
+                desc.textContent = evt.description;
+                body.appendChild(desc);
+              }
+
+              if ((evt.linkUrl && evt.linkText) || (evt.ticketsUrl && evt.ticketsText)) {
+                const actionsRow = document.createElement("div");
+                actionsRow.className = "actions-row";
+
+                if (evt.linkUrl && evt.linkText) {
+                  const infoLink = document.createElement("a");
+                  infoLink.className = "btn-link info";
+                  infoLink.href = evt.linkUrl;
+                  infoLink.target = "_blank";
+                  infoLink.rel = "noopener noreferrer";
+                  infoLink.textContent = evt.linkText;
+                  actionsRow.appendChild(infoLink);
+                }
+
+                if (evt.ticketsUrl && evt.ticketsText) {
+                  const ticketsLink = document.createElement("a");
+                  ticketsLink.className = "btn-link tickets";
+                  ticketsLink.href = evt.ticketsUrl;
+                  ticketsLink.target = "_blank";
+                  ticketsLink.rel = "noopener noreferrer";
+                  ticketsLink.textContent = evt.ticketsText;
+                  actionsRow.appendChild(ticketsLink);
+                }
+
+                body.appendChild(actionsRow);
+              }
+
+              card.appendChild(body);
+              yearGroupDiv.appendChild(card);
+            });
+        });
+
+        eventsListEl.appendChild(yearGroupDiv);
+      });
+
+      // Summary labels
+      countLabelEl.textContent =
+        filtered.length + (filtered.length === 1 ? " event" : " events");
+
+      const filterBits = [];
+      if (yearValue !== "all") filterBits.push(yearValue);
+      if (monthValue !== "all") {
+        const monthIndexFilter = parseInt(monthValue, 10);
+        const anyEvt = filtered.find(
+          e => formatDateParts(e.date).monthIndex === monthIndexFilter
+        );
+        if (anyEvt) filterBits.push(formatDateParts(anyEvt.date).monthLabel);
+      }
+      if (searchTerm) filterBits.push(`matching “${searchTerm}”`);
+
+      filterLabelEl.textContent = filterBits.length
+        ? " · " + filterBits.join(" · ")
+        : "";
+
+      rangeLabelEl.textContent = formatRange(filtered);
+    }
+
+    function scrollToNextEvent() {
+      if (!currentFiltered.length) return;
+      const sorted = [...currentFiltered].sort(
+        (a, b) => parseDate(a.date) - parseDate(b.date)
+      );
+      const idx = getNextUpcomingIndex(sorted);
+      const targetDate = sorted[idx].date;
+
+      let targetCard = eventsListEl.querySelector(
+        `.event-card[data-start-date="${targetDate}"]`
+      );
+
+      const allCards = eventsListEl.querySelectorAll(".event-card");
+      if (!targetCard && allCards.length) {
+        targetCard = allCards[0];
+      }
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    // =====================================================
+    // 6. YEAR BADGE (RANGE)
+    // =====================================================
+    function updateYearBadge() {
+      if (!events.length) {
+        yearLabelEl.textContent = "No events";
+        return;
+      }
+      const years = Array.from(
+        new Set(events.map(e => parseDate(e.date).getFullYear()))
+      ).sort((a, b) => a - b);
+
+      yearLabelEl.textContent =
+        years.length === 1
+          ? years[0]
+          : years[0] + "–" + years[years.length - 1];
+    }
+
+    // =====================================================
+    // 7. INITIALIZE
+    // =====================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!events.length) return;
+
+      sortedAll = [...events].sort(
+        (a, b) => parseDate(a.date) - parseDate(b.date)
+      );
+
+      updateYearBadge();
+      populateYearFilter(sortedAll);
+      populateMonthFilter(sortedAll);
+      renderEvents();
+
+      yearFilterEl.addEventListener("change", () => {
+        const yearValue = yearFilterEl.value;
+        const base =
+          yearValue === "all"
+            ? sortedAll
+            : sortedAll.filter(
+                e => formatDateParts(e.date).year === parseInt(yearValue, 10)
+              );
+        populateMonthFilter(base);
+        renderEvents();
+      });
+
+      monthFilterEl.addEventListener("change", renderEvents);
+      searchInputEl.addEventListener("input", renderEvents);
+      jumpNextBtnEl.addEventListener("click", scrollToNextEvent);
+    });
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"0cd917d33eff449dae63885bb4704a00","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
